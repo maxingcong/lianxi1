@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+	</head>
+	<body>
+	</body>
+</html>
+<script type="text/javascript">
+
+   var xhr = new XMLHttpRequest();  //一个可以扩展的http请求
+          //alert(xhr.readyState);0
+   xhr.open("GET","ajax.php");//建立连接	 
+          // alert(xhr.readyState);1
+   xhr.send(null);//开始工作 发送请求   
+//判断请求状况    和响应状态
+   xhr.onreadystatechange = function(){//监听请求状态 
+   	        // alert(xhr.readyState);//2,3,4
+        if(xhr.readyState == 4){//请求完成
+        	if(xhr.status == 200){//响应正常
+        		alert(xhr.responseText);//拿到响应的值
+        	}else{
+        		alert("响应状态出错");
+        	}
+        }
+}
+
+// xhr.setRequestHeader("Conten-Type","application/x-www-form-urlencoded")
+ //模拟表单提交   post情况下设置请求头
+
+</script>

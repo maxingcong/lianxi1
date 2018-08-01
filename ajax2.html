@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+	</head>
+	<body>
+	</body>
+</html>
+<script type="text/javascript">
+  
+  
+  var obj={"uname":"tom","age":18,"sex":"男"};
+   ajaxGet("POST","text.txt",obj,function(relld){alert(relld)});
+	 //请求方式, 请求地址  ,传输对象,  回调函数
+	function ajaxGet(hw,url,obj,callback ){//为了获取执行结果的值加一个回调函数
+		var xhr = null;
+		if(window.XMLHttpRequest){
+			xhr = new XMLHttpRequest();
+		}else{
+			xhr = new ActiveXObject("Microsoft.XMLHTTP");
+		}
+		
+    	if(hw == "GET"){
+		xhr.open(hw,url+"?"+  ww(obj) +"S="+new Date.getTime());//建立连接    /url . 地址  .查询串 .时间戳
+	    xhr.send(null);//开始执行          
+		}else{
+			
+			xhr.open(hw,url);//建立连接    /url 
+	    	xhr.send( ww(obj) );//开始执行        
+		}
+		
+		xhr.onreadystatechange=function(){//执行状态监控
+			if(xhr.readyState == 4){//请求状态值
+				if(xhr.status == 200){//响应状态值
+					callback(xhr.responseText);//返回执行结果
+				}else{
+					callback("发生错误:"+xhr.styatus+"错误文本"+xhr.statusText);
+				}
+			}
+	
+		}
+
+	}
+	
+	function ww(ob){
+		var arr= [] ;
+         for(var item in ob){
+         	arr.push( item +"="+ encodeURIComponent(ob[item]) );
+         }
+         return arr.join("&");
+	}
+	
+	
+	
+	
+</script>
